@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,intial-scale=1.0">
+<title> SBI NetBanking Registration </title>
+ 
+<link rel="stylesheet" 
+href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.js"></script>
+   <script>
+
+$(document).ready(function(){
+
+    
+    
+    
+    jQuery.validator.addMethod("noSpace", function(value, element) { 
+    return value == '' || value.trim().length != 0;  
+}, "No spaces please ");
+    
+    jQuery.validator.addMethod("number",function(value, element){
+        return value.length >=10;
+         
+    }, "Please enter valid number");
+    
+    
+                               
+ 
+    
+    
+var $registrationForm = $("#form");                          
+    console.log($registrationForm);
+ $registrationForm.validate({
+     rules:{
+         
+         firstname:{
+             required:true,
+             noSpace:true
+         },
+         
+         lastname:{
+             required:true,
+             noSpace:true
+         },
+         
+         username:{
+             required:true,
+             noSpace:true
+         },
+         
+         password:{
+            required:true,
+            noSpace:true
+            
+          },
+     
+         cpassword:{
+            required:true,
+            noSpace:true,
+            equalTo:"#password"
+            
+         },
+         
+         email:{
+             required:true
+         },
+         
+         number:{
+             required:true,
+             number:true
+         },
+        
+         gender:{
+         required:true
+             
+         },
+     
+         country:{
+            required:true
+         },
+     
+         date:{ 
+             required:true,
+             
+         },
+     
+         checkbox:{
+            required:true
+         }
+         
+     },
+     
+     messages:{
+         
+         firstname:{
+         required:"firstname is required"
+         
+     },
+         
+     lastname:{
+         required:"last name is required"
+         },
+         
+      username:{
+         required:"Username is required"
+      },
+        
+      password:{
+         required:"password is required"
+      },
+    
+     cpassword:{
+         required:"confirm password is required"
+     },
+         
+      email:{
+          required:"email id is required"
+      },
+      
+      number:{
+          required:"mobile number is required"
+      },
+         
+    gender:{
+        required:"please select gender"
+    },
+    
+    country:{
+         required:"please select country"
+    },
+    
+     date:{
+         required:"date of birth is required"
+     },
+         
+    checkbox:{
+        required:"please agree terms"
+    }
+         
+         
+ },
+     
+    errorPlacement:function(error,element){
+     if(element.is(":radio")){
+        error.appendTo(element.parents(".gender"));
+         
+        }
+        
+        else
+          {
+           error.insertAfter(element);
+          }
+    }
+        
+ });
+
+    
+              });
+
+</script>
+<style>
+    
+    .main
+    {
+     text-align: center;
+    }
+    
+    .error {
+        
+      color:red;
+      font-style:italic;
+        
+     }
+    
+    h1{
+        
+     text-align: center;
+     background-color: skyblue;
+     padding: 30px;
+     
+    }
+    
+#fn,#ls,#un,#password,#cps,#nm
+    {
+      
+      
+      margin:10px;
+      padding:10px 40px;
+      background-color:aliceblue;
+      border:none;
+
+    }
+  
+ #cn,#em{
+      
+      margin:10px;
+      padding:10px 40px;
+      background-color:aliceblue;
+      border:none; 
+    }
+    
+    #dt{
+      
+      margin:10px;
+      padding:10px 60px  ;
+      background-color:aliceblue;
+      border:none; 
+    }
+    
+    
+ #cb{
+     margin:20px;
+    }
+#sub{
+    padding:5px 25px;  
+    margin-left:60px;
+     margin: 10px;
+    }
+    
+    
+#form
+{
+  text-align: center;
+  color:black;
+ 
+}   
+
+ input[type=radio]{
+     margin:10px;
+     
+    }
+    
+#sub:hover{
+     background-color:black; 
+     
+     color:white;
+    
+    }
+   
+    
+</style>
+
+</head>
+
+<body>
+
+<h1> <img src="image/sbi.png" height="40px" width="40px" alt="sbi logo"> SBI NetBanking Registration </h1>
+
+<div class="container">
+<div class="col-md-4"></div>
+<div class="col-md-5">
+<div class="panel panel-primary">
+<form id="form" action="login.html">
+    
+ 
+ <label for="firstname"> FirstName : </label> 
+ <input type="text" id="fn" name="firstname" placeholder="enter firstName" pattern="[a-zA-Z ]"><br>
+    
+ <label for="lastname"> LastName : </label>
+ <input type="text" id="ls" name="lastname" placeholder="enter lastName" pattern="[a-zA-Z ]"><br>
+    
+ <label for="username">Username : </label>
+ <input type="text" id="un" name="username" placeholder="enter username" pattern="[a-zA-Z][0-9]*{3,20}"><br>
+    
+ <label for="password">Password :</label>
+ <input type="password" id="password" name="password" placeholder="enter password" pattern="[a-zA-Z][0-9]*{3,20}"><br>
+    
+ <label for="cpassword">Confirm<br>Password :</label> 
+ <input type="text" id="cps" name="cpassword" placeholder="confirm password" pattern="[a-zA-Z][0-9]*{3,20}" title="Password and Confirm password should be same"><br>
+    
+  <label for="email">Email id : </label>
+ <input type="email" id="em" name="email" placeholder="enter email"><br>
+    
+  <label for="email">Mobile No : </label>
+ <input type="number" id="nm" name="number" placeholder="enter number"><br>
+    
+ <div class="gender">
+ <input type="radio" id="ml" name="gender" value="male">
+ <label for="male">Male</label>
+ 
+ <input type="radio" id="fm" name="gender" value="female">
+ <label for="female">Female</label>
+    
+ <input type="radio" id="ot" name="gender" value="others">
+ <label for="others">Others</label><br>
+ </div>
+    
+    
+ <label for="country">Country :</label>
+ <select name="country" id="cn">
+   <option value="india">India</option> 
+   <option value="Canada">Canada</option>
+   <option value="usa">United States Of America</option>
+   <option value="Russia">Russia</option>
+   <option value="China">China</option>
+ </select>
+ <br>
+    
+ <label for="date">BirthDate:</label>    
+ <input type="date" id="dt" name="date" min="1970-01-01"><br>
+ 
+
+ <div class=".check">
+ <input type="checkbox" id="cb" name="checkbox">
+ <label for="checkbox"> I Agree Privacypolicy & <a href="#" id="tc"> Terms</a></label><br>
+ </div>
+    
+ <input type="submit" id="sub" name="submit">
+
+    </form> 
+    </div>
+    </div>
+    </div>
+    
+</body>
+
+
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,intial-scale=1.0">
+<head>
+</head>
+
+<body>
+
+<h1> <img src="images/sbi.png" height="40px" width="40px" alt="sbi logo"> SBI NetBanking Registration </h1>
+
+<div class="container">
+<div class="col-md-4"></div>
+<div class="col-md-5">
+<div class="panel panel-primary">
+<form id="form" action="login.html">
+    
+ 
+ <label for="firstname"> FirstName : </label> 
+ <input type="text" id="fn" name="firstname" placeholder="enter firstName" pattern="[a-zA-Z ]"><br>
+    
+ <label for="lastname"> LastName : </label>
+ <input type="text" id="ls" name="lastname" placeholder="enter lastName" pattern="[a-zA-Z ]"><br>
+    
+ <label for="username">Username : </label>
+ <input type="text" id="un" name="username" placeholder="enter username" pattern="[a-zA-Z][0-9]*{3,20}"><br>
+    
+ <label for="password">Password :</label>
+ <input type="password" id="password" name="password" placeholder="enter password" pattern="[a-zA-Z][0-9]*{3,20}"><br>
+    
+ <label for="cpassword">Confirm<br>Password :</label> 
+ <input type="text" id="cps" name="cpassword" placeholder="confirm password" pattern="[a-zA-Z][0-9]*{3,20}" title="Password and Confirm password should be same"><br>
+    
+  <label for="email">Email id : </label>
+ <input type="email" id="em" name="email" placeholder="enter email"><br>
+    
+  <label for="email">Mobile No : </label>
+ <input type="number" id="nm" name="number" placeholder="enter number"><br>
+    
+ <div class="gender">
+ <input type="radio" id="ml" name="gender" value="male">
+ <label for="male">Male</label>
+ 
+ <input type="radio" id="fm" name="gender" value="female">
+ <label for="female">Female</label>
+    
+ <input type="radio" id="ot" name="gender" value="others">
+ <label for="others">Others</label><br>
+ </div>
+    
+    
+ <label for="country">Country :</label>
+ <select name="country" id="cn">
+   <option value="india">India</option> 
+   <option value="Canada">Canada</option>
+   <option value="usa">United States Of America</option>
+   <option value="Russia">Russia</option>
+   <option value="China">China</option>
+ </select>
+ <br>
+    
+ <label for="date">BirthDate:</label>    
+ <input type="date" id="dt" name="date" min="1970-01-01"><br>
+ 
+
+ <div class=".check">
+ <input type="checkbox" id="cb" name="checkbox">
+ <label for="checkbox"> I Agree Privacypolicy & <a href="#" id="tc"> Terms</a></label><br>
+ </div>
+    
+ <input type="submit" id="sub" name="submit">
+
+    </form> 
+    </div>
+    </div>
+    </div>
+    
+</body>
+
+
+</html>
