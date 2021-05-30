@@ -5,32 +5,81 @@
 <meta name="viewport" content="width=device-width,intial-scale=1.0">
 <title> SBI NetBanking Registration </title>
  
+<!--Bootstrap link-->
 <link rel="stylesheet" 
-href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anoniymous">
     
+    <!--jquery cdn link-->
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!--jquery validator link-->
    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.js"></script>
    <script>
 
 $(document).ready(function(){
+   
+// password validator 
+function validate(p) {
+     var minMaxLength = /^[\s\S]{5,32}$/,
+        upper = /[A-Z]/,
+        lower = /[a-z]/,
+        number = /[0-9]/,
+        special = /[ !"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]/;
+
+    if (minMaxLength.test(p) &&
+        upper.test(p) &&
+        lower.test(p) &&
+        number.test(p) &&
+        special.test(p)) {
+        return p;
+    }
+    
+    };
+    
+
+// email validator
+function email(e){
+    if(e.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)){
+        return e;
+    }
+};
+    
 
     
     
+      //no space validator
+      jQuery.validator.addMethod("noSpace", function(value, element) { 
+            return value.trim()!=0 && value.length > 4 && value.match(/^[0-9A-Za-z]+$/);
+}, "No Spaces please ");
     
-    jQuery.validator.addMethod("noSpace", function(value, element) { 
-    return value == '' || value.trim().length != 0;  
-}, "No spaces please ");
-    
+    // phone number validator
     jQuery.validator.addMethod("number",function(value, element){
         return value.length >=10;
          
     }, "Please enter valid number");
+	
+    // text validator
+    jQuery.validator.addMethod("textvalidation", function(value, element) { 
+            return isNaN(value) && value.length > 4 && value.match(/^[A-Za-z]+$/);
+}, "only characters are allowed and min length 4 ");
+	
+    //password validator 
+    jQuery.validator.addMethod("password",function(value,element){
+        return validate(value);
+    },"please match password pattern ");
+     
+    //email validator
+    jQuery.validator.addMethod("email",function(value,element){
+        return email(value);
+    },"enter valid email id ");
     
     
-                               
- 
+    jQuery.validator.addMethod("date",function(value,element){
+        return dates(value);
+        
+    },"enter valid date");
     
-    
+
+// jquery validator    
 var $registrationForm = $("#form");                          
     console.log($registrationForm);
  $registrationForm.validate({
@@ -38,12 +87,14 @@ var $registrationForm = $("#form");
          
          firstname:{
              required:true,
-             noSpace:true
+             textvalidation:true
+             
          },
          
          lastname:{
              required:true,
-             noSpace:true
+             textvalidation:true
+             
          },
          
          username:{
@@ -53,13 +104,12 @@ var $registrationForm = $("#form");
          
          password:{
             required:true,
-            noSpace:true
+            password:true
             
           },
      
          cpassword:{
             required:true,
-            noSpace:true,
             equalTo:"#password"
             
          },
@@ -83,7 +133,7 @@ var $registrationForm = $("#form");
          },
      
          date:{ 
-             required:true,
+             required:true
              
          },
      
@@ -97,11 +147,12 @@ var $registrationForm = $("#form");
          
          firstname:{
          required:"firstname is required"
-         
+		 
      },
          
      lastname:{
-         required:"last name is required"
+         required:"last name is required",
+         
          },
          
       username:{
@@ -142,7 +193,8 @@ var $registrationForm = $("#form");
          
          
  },
-     
+    
+    // error placement
     errorPlacement:function(error,element){
      if(element.is(":radio")){
         error.appendTo(element.parents(".gender"));
@@ -161,6 +213,7 @@ var $registrationForm = $("#form");
               });
 
 </script>
+
 <style>
     
     .main
@@ -257,25 +310,25 @@ var $registrationForm = $("#form");
     
  
  <label for="firstname"> FirstName : </label> 
- <input type="text" id="fn" name="firstname" placeholder="enter firstName" pattern="[a-zA-Z ]"><br>
+ <input type="text" id="fn" name="firstname" placeholder="enter firstName" pattern="[a-zA-Z]"  required><br>
     
  <label for="lastname"> LastName : </label>
- <input type="text" id="ls" name="lastname" placeholder="enter lastName" pattern="[a-zA-Z ]"><br>
+ <input type="text" id="ls" name="lastname" placeholder="enter lastName" pattern="[a-zA-Z]"     required><br>
     
  <label for="username">Username : </label>
- <input type="text" id="un" name="username" placeholder="enter username" pattern="[a-zA-Z][0-9]*{3,20}"><br>
+ <input type="text" id="un" name="username" placeholder="enter username" pattern="[a-zA-Z][0-9]*{5,20}" required><br>
     
  <label for="password">Password :</label>
- <input type="password" id="password" name="password" placeholder="enter password" pattern="[a-zA-Z][0-9]*{3,20}"><br>
+ <input type="password" id="password" name="password" placeholder="enter password" pattern="[a-zA-Z][0-9]*{5,20}" required><br>
     
  <label for="cpassword">Confirm<br>Password :</label> 
- <input type="text" id="cps" name="cpassword" placeholder="confirm password" pattern="[a-zA-Z][0-9]*{3,20}" title="Password and Confirm password should be same"><br>
+ <input type="text" id="cps" name="cpassword" placeholder="confirm password" pattern="[a-zA-Z][0-9]*{3,20}" title="Password and Confirm password should be same" required><br>
     
   <label for="email">Email id : </label>
- <input type="email" id="em" name="email" placeholder="enter email"><br>
+ <input type="email" id="em" name="email" placeholder="enter email" required><br>
     
   <label for="email">Mobile No : </label>
- <input type="number" id="nm" name="number" placeholder="enter number"><br>
+ <input type="number" id="nm" name="number" placeholder="enter number" required><br>
     
  <div class="gender">
  <input type="radio" id="ml" name="gender" value="male">
@@ -290,7 +343,7 @@ var $registrationForm = $("#form");
     
     
  <label for="country">Country :</label>
- <select name="country" id="cn">
+ <select name="country" id="cn" required>
    <option value="india">India</option> 
    <option value="Canada">Canada</option>
    <option value="usa">United States Of America</option>
@@ -300,7 +353,7 @@ var $registrationForm = $("#form");
  <br>
     
  <label for="date">BirthDate:</label>    
- <input type="date" id="dt" name="date" min="1970-01-01"><br>
+ <input type="date" id="dt" name="date" min="1970-01-01" ><br>
  
 
  <div class=".check">
